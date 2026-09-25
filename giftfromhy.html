@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>You received a gift!</title>
-    <!-- Font chữ hiện đại & cute -->
+    <!-- Font chữ cute & hiện đại -->
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -20,12 +20,12 @@
             transition: background 1.5s ease;
         }
 
-        /* Nền pastel chuyển màu xịn mịn sau khi mở quà */
+        /* Nền pastel chuyển màu mịn màng sau khi bấm mở quà */
         body.opened {
             background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #f0f9ff 100%);
         }
 
-        /* Hiệu ứng icon bay lơ lửng */
+        /* Hiệu ứng bong bóng / cún / tim bay lơ lửng */
         .floating-item {
             position: absolute;
             bottom: -50px;
@@ -42,11 +42,11 @@
             100% { transform: translateY(-115vh) rotate(360deg) scale(1.2); opacity: 0; }
         }
 
-        /* Card Container */
+        /* Thẻ Thiệp */
         .card {
             background: rgba(30, 27, 75, 0.85);
             backdrop-filter: blur(20px);
-            padding: 40px 32px;
+            padding: 42px 32px;
             border-radius: 32px;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
             text-align: center;
@@ -64,7 +64,7 @@
             border: 2px solid #ffffff;
         }
 
-        /* Giao diện Nitro giả lập cực cute */
+        /* Giao diện Nitro màn hình đầu */
         .nitro-box {
             display: flex;
             flex-direction: column;
@@ -99,16 +99,16 @@
         }
 
         .heart-sub {
-            font-size: 30px;
+            font-size: 32px;
             margin-bottom: 25px;
             animation: heartBeat 1.2s infinite;
         }
         @keyframes heartBeat {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            50% { transform: scale(1.25); }
         }
 
-        /* Avatar & Nội dung Sinh Nhật */
+        /* Nội dung Sinh Nhật (ẩn lúc đầu) */
         .birthday-content {
             display: none;
             opacity: 0;
@@ -156,12 +156,12 @@
             min-height: 80px;
         }
 
-        /* Nút Tương Tác */
+        /* Nút Accept Gift */
         .btn-claim {
             background: linear-gradient(135deg, #f472b6, #ec4899);
             color: white;
             border: none;
-            padding: 15px 34px;
+            padding: 15px 36px;
             font-size: 16px;
             font-weight: 700;
             border-radius: 50px;
@@ -195,22 +195,21 @@
         <!-- Birthday Content Screen -->
         <div class="birthday-content" id="birthdayContent">
             <div class="avatar-box">🐶</div>
-            <h1>Happy Birthday<br>Ngoc Bich x QV 💙✨</h1>
+            <h1>Happy Birthday<br>Ngoc Bich x ᵠᵛ 💙✨</h1>
             <div class="typing-text" id="typewriter"></div>
         </div>
     </div>
 
-    <!-- Nhạc Sinh Nhật Piano Du Dương Siêu Mượt -->
+    <!-- Nhạc Piano Sinh Nhật Mượt Tròn Trịn -->
     <audio id="bg-music" loop preload="auto">
         <source src="https://ia801503.us.archive.org/15/items/HappyBirthdayToYou_201802/HappyBirthdayToYou.mp3" type="audio/mpeg">
     </audio>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
-        // Nội dung đúng chuẩn từng dòng
         const lines = [
-            "chuc mung sinh nhat Be Cun",
-            "tuổi mới thành công phát tài",
+            "chúc ngoc bich x ᵠᵛ",
+            "tuổi mới thành \"công\" phát tài",
             "lon dep nhu hoaa 🎉🎂🎁"
         ];
         
@@ -223,7 +222,7 @@
                 if (charIdx < lines[lineIdx].length) {
                     container.innerHTML += lines[lineIdx].charAt(charIdx);
                     charIdx++;
-                    setTimeout(typeWriter, 40);
+                    setTimeout(typeWriter, 45);
                 } else {
                     container.innerHTML += "<br>";
                     lineIdx++;
@@ -248,26 +247,21 @@
         }
 
         function openGift() {
-            // Chuyển nền & theme card mượt mà
             document.body.classList.add('opened');
             const card = document.getElementById('mainCard');
             
-            // Ẩn Nitro, hiện nội dung chúc mừng
             document.getElementById('nitroBox').style.display = 'none';
             card.classList.add('light-theme');
             
             const content = document.getElementById('birthdayContent');
             content.classList.add('show');
 
-            // Chạy hiệu ứng gõ chữ & icon bay
             setTimeout(typeWriter, 300);
             startFloatingIcons();
 
-            // Phát nhạc piano sinh nhật
             var audio = document.getElementById('bg-music');
             audio.play().catch(e => console.log(e));
 
-            // Bắn pháo hoa hiệu ứng dồn dập
             var duration = 3.5 * 1000;
             var end = Date.now() + duration;
 
