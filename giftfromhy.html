@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Ngọc Big 🩵</title>
+<!-- Font chữ cute & hiện đại -->
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+        font-family: 'Quicksand', sans-serif;
+        background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #f0f9ff 100%);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    /* Hiệu ứng bong bóng / trái tim pastel bay nhẹ */
+    .floating-item {
+        position: absolute;
+        bottom: -50px;
+        font-size: 24px;
+        animation: floatUp 6s linear infinite;
+        opacity: 0.8;
+        pointer-events: none;
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+        100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Thẻ Thiệp Thiết Kế Pastel */
+    .card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        padding: 40px 30px;
+        border-radius: 30px;
+        box-shadow: 0 20px 40px rgba(186, 230, 253, 0.5);
+        border: 2px solid #ffffff;
+        text-align: center;
+        max-width: 90%;
+        width: 380px;
+        z-index: 10;
+        animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes popIn {
+        0% { transform: scale(0.8); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Icon Cún Cute */
+    .dog-avatar {
+        font-size: 70px;
+        background: #e0f2fe;
+        width: 110px;
+        height: 110px;
+        line-height: 110px;
+        border-radius: 50%;
+        margin: 0 auto 15px;
+        box-shadow: inset 0 0 10px rgba(56, 189, 248, 0.2);
+        animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    h1 {
+        font-family: 'Comfortaa', cursive;
+        color: #0284c7;
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+
+    p {
+        color: #0369a1;
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 25px;
+        font-weight: 500;
+    }
+
+    /* Nút bấm bật nhạc & pháo hoa */
+    .btn-celebrate {
+        background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+        color: white;
+        border: none;
+        padding: 12px 28px;
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 8px 15px rgba(56, 189, 248, 0.4);
+        transition: all 0.3s ease;
+        font-family: 'Quicksand', sans-serif;
+    }
+    .btn-celebrate:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 20px rgba(56, 189, 248, 0.6);
+    }
+    .btn-celebrate:active {
+        transform: translateY(1px);
+    }
+</style>
+</head>
+<body onclick="createSparkle(event)">
+
+    <!-- Nhạc nền sinh nhật nhẹ nhàng vui tươi -->
+    <audio id="bg-music" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a7315b.mp3?filename=happy-birthday-155461.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="card">
+        <div class="dog-avatar">🐶🩵</div>
+        <h1>Happy Birthday<br>Ngọc Big ✨</h1>
+        <p>Chúc <b>Bé Cún</b> tuổi mới phát tài<br>thành "công" rực rỡ nha! 🎉🎂🎈</p>
+        <button class="btn-celebrate" onclick="playBirthday(event)">Ấn vào đây nè! 🎵</button>
+    </div>
+
+<script>
+    // Bật nhạc & tạo pháo hoa xanh pastel
+    function playBirthday(e) {
+        e.stopPropagation();
+        var audio = document.getElementById('bg-music');
+        audio.play();
+
+        // Tạo hiệu ứng nổ pháo hoa icon pastel
+        const icons = ['🩵', '🐶', '✨', '🎈', '☁️', '🎁', '🎂'];
+        for (let i = 0; i < 30; i++) {
+            setTimeout(() => {
+                const item = document.createElement('div');
+                item.className = 'floating-item';
+                item.innerText = icons[Math.floor(Math.random() * icons.length)];
+                item.style.left = Math.random() * 100 + 'vw';
+                item.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                item.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                document.body.appendChild(item);
+                
+                setTimeout(() => item.remove(), 6000);
+            }, i * 100);
+        }
+    }
+
+    // Ấn bất kỳ đâu trên màn hình cũng ra icon đáng yêu
+    function createSparkle(e) {
+        const sparkles = ['🩵', '✨', '🐶', '☁️'];
+        const item = document.createElement('div');
+        item.innerText = sparkles[Math.floor(Math.random() * sparkles.length)];
+        item.style.position = 'absolute';
+        item.style.left = e.clientX + 'px';
+        item.style.top = e.clientY + 'px';
+        item.style.fontSize = '24px';
+        item.style.pointerEvents = 'none';
+        item.style.transition = 'all 1s ease-out';
+        document.body.appendChild(item);
+
+        setTimeout(() => {
+            item.style.transform = 'translateY(-50px) scale(1.5)';
+            item.style.opacity = '0';
+        }, 50);
+
+        setTimeout(() => item.remove(), 1050);
+    }
+</script>
+</body>
+</html>
