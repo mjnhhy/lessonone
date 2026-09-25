@@ -19,13 +19,29 @@
             position: relative;
         }
 
+        /* Hiệu ứng bong bóng / cún / trái tim bay lơ lửng tung tăng */
+        .floating-item {
+            position: absolute;
+            bottom: -50px;
+            font-size: 26px;
+            animation: floatUp 5s linear infinite;
+            opacity: 0.85;
+            pointer-events: none;
+            z-index: 1;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0.9; }
+            50% { opacity: 1; transform: translateY(-50vh) rotate(180deg) scale(1.1); }
+            100% { transform: translateY(-110vh) rotate(360deg) scale(0.8); opacity: 0; }
+        }
+
         /* Thẻ Thiệp Thiết Kế */
         .card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 45px 30px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            padding: 45px 32px;
             border-radius: 30px;
-            box-shadow: 0 20px 50px rgba(186, 230, 253, 0.6);
+            box-shadow: 0 20px 50px rgba(186, 230, 253, 0.7);
             text-align: center;
             max-width: 400px;
             width: 90%;
@@ -35,7 +51,7 @@
             transition: all 0.5s ease;
         }
 
-        /* Phần Hộp Quà Nitro giả lập lúc chưa bấm */
+        /* Màn hình Nitro ban đầu */
         .nitro-box {
             display: flex;
             flex-direction: column;
@@ -47,9 +63,9 @@
             color: white;
             font-size: 22px;
             font-weight: bold;
-            padding: 12px 28px;
+            padding: 14px 28px;
             border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(247, 23, 243, 0.3);
+            box-shadow: 0 8px 20px rgba(247, 23, 243, 0.35);
             margin-bottom: 15px;
             font-family: 'Comfortaa', cursive;
         }
@@ -61,15 +77,29 @@
             font-weight: 500;
         }
 
-        /* Phần Nội Dung Chúc Mừng (Ẩn lúc đầu) */
-        .birthday-content {
-            display: none;
-            animation: fadeIn 0.8s ease forwards;
+        /* Khung Avatar Cún Con Xinh Xắn */
+        .avatar-box {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            background: #3b82f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+            font-size: 45px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Nội dung sinh nhật ẩn lúc đầu */
+        .birthday-content {
+            display: none;
+            animation: popIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         h1 {
@@ -123,31 +153,50 @@
 
         <!-- Nội dung sinh nhật lộ ra sau khi bấm -->
         <div class="birthday-content" id="birthdayContent">
+            <div class="avatar-box">🐶</div>
             <h1>Happy Birthday<br>Ngọc Big 💙✨</h1>
             <p>Chúc <b>Bé Cún</b> tuổi mới phát tài,<br>thành "công" rực rỡ nha! 🎉🎂🎁</p>
         </div>
 
     </div>
 
-    <!-- Nhạc Sinh Nhật MP3 Chuẩn Đét 100% Phát Được -->
+    <!-- Nhạc Happy Birthday Chuẩn Tươi Vui 100% -->
     <audio id="bg-music" loop preload="auto">
-        <source src="https://assets.mixkit.co/active_storage/sfx/2702/2702-preview.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_bb630cc121.mp3?filename=happy-birthday-155461.mp3" type="audio/mpeg">
     </audio>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script>
+        // Hàm tạo bóng bóng, cún con, trái tim bay lơ lửng tung tăng
+        function startFloatingIcons() {
+            const icons = ['🐶', '💙', '✨', '🐾', '🎈', '🎂', '🎁'];
+            setInterval(() => {
+                const item = document.createElement('div');
+                item.classList.add('floating-item');
+                item.innerText = icons[Math.floor(Math.random() * icons.length)];
+                item.style.left = Math.random() * 95 + 'vw';
+                item.style.animationDuration = (Math.random() * 2 + 4) + 's';
+                document.body.appendChild(item);
+
+                setTimeout(() => { item.remove(); }, 6000);
+            }, 300);
+        }
+
         function openGift() {
-            // An Nitro box & hien noi dung sinh nhat
+            // Ẩn Nitro box & hiện nội dung sinh nhật
             document.getElementById('nitroBox').style.display = 'none';
             document.getElementById('birthdayContent').style.display = 'block';
             
-            // Phat nhac MP3
+            // Bắt đầu cho icon đáng yêu bay tung tăng
+            startFloatingIcons();
+
+            // Phát nhạc Happy Birthday
             var audio = document.getElementById('bg-music');
             audio.play().catch(function(e) {
-                console.log("Audio play error:", e);
+                console.log("Audio error:", e);
             });
 
-            // Ban phao hoa
+            // Bắn pháo hoa rực rỡ
             var count = 200;
             var defaults = { origin: { y: 0.7 } };
 
