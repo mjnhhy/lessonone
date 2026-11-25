@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #fff5f7 0%, #ffeef2 50%, #fffafb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            color: #6d4c55;
+            padding: 20px 0;
+        }
+
+        /* Hoa hồng nhạt rơi nhẹ nhàng */
+        .petal {
+            position: fixed;
+            top: -40px;
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 1;
+            animation: fallDown linear infinite;
+        }
+        @keyframes fallDown {
+            0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0; }
+            15% { opacity: 0.65; }
+            85% { opacity: 0.65; }
+            100% { transform: translateY(105vh) rotate(360deg) translateX(25px); opacity: 0; }
+        }
+
+        /* Khung thiệp chính - chạm vào bất kỳ đâu để sang trang */
+        .card {
+            background: rgba(255, 255,
